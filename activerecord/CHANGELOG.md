@@ -1,5 +1,26 @@
 ## Rails 4.2.5 (November 12, 2015) ##
 
+*   Add support for bidirectional destroy dependencies.
+
+    Fixes #13609.
+
+    Example:
+
+        class Content < ActiveRecord::Base
+          has_one :position, dependent: :destroy
+        end
+
+        class Position < ActiveRecord::Base
+          belongs_to :content, dependent: :destroy
+        end
+
+    *Seb Jacobs*
+
+*   `time` columns can now affected by `time_zone_aware_attributes`. If you have
+    set `config.time_zone` to a value other than `'UTC'`, they will be treated
+    as in that time zone by default in Rails 5.0. If this is not the desired
+    behavior, you can set
+
 *   No longer pass deprecated option `-i` to `pg_dump`.
 
     *Paul Sadauskas*
